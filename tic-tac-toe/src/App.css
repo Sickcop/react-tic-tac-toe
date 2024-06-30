@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.turn-board {
+  display: flex;
+  height: 100px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-turn {
+  height: 50px;
+  display: grid;
+  place-items: center;
+  height: 50px;
+  width: 50px;
+  font-size: 40px;
+}
+
+.isSelected {
+  background-color: cornflowerblue;
+}
+
