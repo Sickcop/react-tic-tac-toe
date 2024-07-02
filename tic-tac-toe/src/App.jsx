@@ -6,31 +6,40 @@ import { TURN } from './constants/constants.js'
 
 function App() {
 
-  const [board, setBoard] = useState(Array(9).fill(null))
-
-  const updateBoard = () => {
-
-  }
-
+  const square = document.getElementsByClassName('.square')
   const [turn, setTurn] = useState(true)
+  const [board, setBoard] = useState(Array(9).fill(null))
   
-  const updatedTurn = () => {
-    setTurn(!turn)
+  const turnBoard = turn == true ? 'X' : 'O'
+  const newBoard = [...board]
+
+  addEventListener('click', (e) => {
+    for(element in board) {
+      element = new
+    }
+  })
+  
+  const allUpdates = () => {
+
+    const updatedTurn = () => {
+      setTurn(!turn)
+    }
+
+    updatedTurn()
   }
 
   const isSelected = turn === true? 'isSelected' : ''
   const isSelected2 = turn === false? 'isSelected' : ''
 
-  // const turnClass = turn = TURN.X ? ''
 
   return (
   <main className='board'>
     <h1>Tic Tac Toe</h1>
     <section className='container'>
       {
-        board.map((a,i) => {
+        board.map((a,index) => {
           return (
-            <Square key={i} updateTurn={updatedTurn}></Square>
+            <Square key={index} updateTurn={allUpdates} index={index}>{a}</Square>
           )
         })
       }
