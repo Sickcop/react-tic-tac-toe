@@ -1,55 +1,66 @@
-import { useState } from 'react'
 import './App.css'
+import { useState } from 'react'
 
-import Square from './components/square'
-import { TURN } from './constants/constants.js'
+const TURNS = {
+  X : 'x',
+  O : 'o'
+}
+
+const Square = ({ children, isSelected, updateBoard, index }) => {
+  
+  const className = `square ${isSelected ? 'is-selected' : ''}`
+
+  const handleClick = () => {
+    updateBoard(index)
+  }
+
+  return(
+    <div className={className} onClick={handleClick}>
+      {children}
+    </div>
+  )
+
+}
 
 function App() {
 
-  const square = document.getElementsByClassName('.square')
-  const [turn, setTurn] = useState(true)
   const [board, setBoard] = useState(Array(9).fill(null))
-  
-  const turnBoard = turn == true ? 'X' : 'O'
-  const newBoard = [...board]
+  const [turn, setTurn] = useState(TURNS.X)
 
-  addEventListener('click', (e) => {
-    for(element in board) {
-      element = new
-    }
-  })
-  
-  const allUpdates = () => {
-
-    const updatedTurn = () => {
-      setTurn(!turn)
-    }
-
-    updatedTurn()
+  const updateBoard = (index) => {  
+    const newBoard = [...board]
+    newBoard[index] = turn
+    setBoard(newBoard)
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
+    setTurn(newTurn)
   }
 
-  const isSelected = turn === true? 'isSelected' : ''
-  const isSelected2 = turn === false? 'isSelected' : ''
+  return(
+    <main className='board'>
+      <h1>Tic-Tac-Toe</h1>
+      <section className="game">
+        {
+          board.map((a, index) => {
+            return (
+              <Square
+                key={index}
+                index={index}
+                updateBoard={updateBoard}
+              >
+                {board[index]}
+              </Square>
+            )
+          })
+        }
+      </section>
 
-
-  return (
-  <main className='board'>
-    <h1>Tic Tac Toe</h1>
-    <section className='container'>
-      {
-        board.map((a,index) => {
-          return (
-            <Square key={index} updateTurn={allUpdates} index={index}>{a}</Square>
-          )
-        })
-      }
-    </section>
-    <section className='turn-board'>
-      <div className={`container-turn ${isSelected}`}>{TURN.X}</div>
-      <div className={`container-turn ${isSelected2}`}>{TURN.O}</div>
-    </section>
-  </main>
+      <section className='turn '>
+        <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
+        <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
+      </section>
+    </main>
   )
+
 }
 
-export default App
+export default App;
